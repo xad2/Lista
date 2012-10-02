@@ -22,9 +22,6 @@ static const char REMOVER_STR[] = "(r) Remover Transações";
 static const char SALDO_STR[] = "(s) Mostrar Saldo";
 static const char SAIR_STR[] = "(x) Sair";
 
-ListaContabil debitos;
-ListaContabil creditos;
-
 static void comandoRemoverDaPosicao(std::istream &stream, std::istream &file,
 		ListaContabil &listaContabil) {
 
@@ -196,8 +193,11 @@ static void execucaoInterativa() {
 
 	bool foiSelecionada = false;
 
-	ListaContabil *listaAtual;
+	ListaContabil debitos;
+	ListaContabil creditos;
+	ListaContabil *listaAtual = NULL;
 	std::string listaSelecionada;
+
 	while (true) {
 
 		if (!foiSelecionada)
@@ -214,12 +214,12 @@ static void execucaoInterativa() {
 
 			listaSelecionada = "CRÉDITOS";
 			foiSelecionada = true;
-			creditos = *listaAtual;
+			listaAtual = &creditos;
 
 		} else if (strcasecmp(comando.c_str(), "d") == 0) {
 			listaSelecionada = "DÉBITOS";
 			foiSelecionada = true;
-			creditos = *listaAtual;
+			listaAtual = &debitos;
 
 		} else if (strcasecmp(comando.c_str(), "x") == 0) {
 			continue;
