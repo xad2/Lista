@@ -7,7 +7,9 @@
 
 #include "Lancamento.h"
 
-Lancamento :: Lancamento(){
+Lancamento :: Lancamento()
+	: valor(0)
+{
 
 }
 
@@ -19,16 +21,18 @@ void Lancamento::mudarValor(int nvalor){
 	valor = nvalor;
 }
 
-void Lancamento::mudarNome(char *_nome){
+void Lancamento::mudarNome(const char *_nome)
+{
 
 	nome = _nome;
 }
 
-char Lancamento::retornarNome(){
-
-	return *nome;
+std::string Lancamento::retornarNome() const
+{
+	return nome;
 }
 
-int Lancamento:: retornarValor(){
+int Lancamento::retornarValor() const
+{
 	return valor;
 }

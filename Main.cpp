@@ -233,15 +233,16 @@ static void execucaoInterativa() {
 
 static void execucaoDeTestes(const std::string &filename) {
 
+	ListaContabil debitos;
+	ListaContabil creditos;
+	ListaContabil listaAtual;
 
 	std::ifstream file(filename.c_str());
-	std::istream input;
 	std::string line;
-	ListaContabil listaAtual;
 	bool foiCriado;
 
 	//While file is not finished
-	while (std::getline(input, line)) {
+	while (std::getline(file, line)) {
 		std::stringstream stream(line);
 		std::string command = line;
 		stream >> command;
@@ -258,11 +259,11 @@ static void execucaoDeTestes(const std::string &filename) {
 		} else if (foiCriado) {
 
 			if (command == "INSERIR") {
-				comandoInserir(stream, input, listaAtual);
+				comandoInserir(stream, file, listaAtual);
 			} else if (command == "INSERIR_EM_ORDEM") {
-				comandoInserirEmOrdem(stream, input, listaAtual);
+				comandoInserirEmOrdem(stream, file, listaAtual);
 			} else if (command == "INSERIR_NA_POSICAO") {
-				comandoInserirNaPosicao(stream, input, listaAtual);
+				comandoInserirNaPosicao(stream, file, listaAtual);
 			} else if (command == "MOSTRAR") {
 				comandoMostrar(listaAtual);
 			} else if (command == "REMOVER") {
