@@ -23,21 +23,23 @@ public:
 	bool listaVazia ();
 	bool maior(int dado1, int dado2);
 	bool menor(int dado1, int dado2);
-	bool igual(int dado1, int dado2);
-	bool contem(int dado);
+	bool igual(Lancamento dado1, Lancamento dado2);
+	bool contem(Lancamento dado);
 
 
-	void inicializarLista();
-	void destruirLista();
-	int adicionar(int dado);
-	int adicionarNoInicio(int dado);
-	int adicionaNaPosicao(int dado, int pos_destino);
-	int adicionarEmOrdem(int dado);
+	void inicializar();
+	void destruir();
+	int adicionar(Lancamento dado);
+	int adicionarNoInicio(Lancamento dado);
+	int adicionaNaPosicao(Lancamento dado, int pos_destino);
+	int adicionarEmOrdem(Lancamento dado);
 	int retirar();
 	int retirarDoInicio();
 	int retirarDaPosicao(int pos);
-	int retirarEspecifico(int);
-	int posicao(int dado);
+	int retirarEspecifico(Lancamento lancamento);
+	int posicao(Lancamento dado);
+	int retornarUltimo();
+	Lancamento retornarLancamento(int pos);
 };
 
 #endif /* LISTACONTABIL_H_ */

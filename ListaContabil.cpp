@@ -16,6 +16,10 @@ ListaContabil::~ListaContabil() {
 	ultimo = -1;
 }
 
+void ListaContabil::inicializar() {
+	ultimo = -1;
+}
+
 bool ListaContabil::listaCheia() {
 	if (ultimo + 1 == MAXLISTA) {
 		return true;
@@ -30,19 +34,20 @@ bool ListaContabil::listaVazia() {
 	return false;
 }
 
-int ListaContabil::adicionar(int dado) {
+int ListaContabil::adicionar(Lancamento lancamento) {
 
 	if (listaCheia()) {
 		return '\0';
 	}
 
 	ultimo++;
-	lista[ultimo].mudarValor(dado);
+	lista[ultimo].mudarValor(lancamento.valor);
+	lista[ultimo].mudarNome(lancamento.nome);
 	return (ultimo);
 
 }
 
-int ListaContabil::adicionarNoInicio(int dado) {
+int ListaContabil::adicionarNoInicio(Lancamento lancamento) {
 
 	int pos;
 	if (listaCheia()) {
@@ -57,7 +62,9 @@ int ListaContabil::adicionarNoInicio(int dado) {
 		lista[pos] = lista[pos - 1];
 		pos--;
 	}
-	lista[0].mudarValor(dado);
+
+	lista[0].mudarValor(lancamento.valor);
+	lista[0].mudarNome(lancamento.nome);
 
 	return ultimo;
 
@@ -93,7 +100,7 @@ int ListaContabil::retirarDoInicio() {
 
 }
 
-int ListaContabil::adicionaNaPosicao(int dado, int pos_destino) {
+int ListaContabil::adicionaNaPosicao(Lancamento lancamento, int pos_destino) {
 
 	int pos;
 
@@ -112,7 +119,8 @@ int ListaContabil::adicionaNaPosicao(int dado, int pos_destino) {
 		pos--;
 	}
 
-	lista[pos_destino].mudarValor(dado);
+	lista[pos_destino].mudarValor(lancamento.valor);
+	lista[pos_destino].mudarNome(lancamento.nome);
 
 	return pos_destino;
 
@@ -158,7 +166,7 @@ bool ListaContabil::menor(int dado1, int dado2) {
 	return false;
 
 }
-bool ListaContabil::igual(int dado1, int dado2) {
+bool ListaContabil::igual(Lancamento dado1, Lancamento dado2) {
 
 	if (dado1 == dado2)
 		return true;
@@ -167,10 +175,11 @@ bool ListaContabil::igual(int dado1, int dado2) {
 
 }
 
-bool ListaContabil::contem(int dado) {
+bool ListaContabil::contem(Lancamento lancamento) {
 
 	for (int i = 0; i < lista[ultimo] + 1; i++) {
-		if (dado == lista[i]) {
+		if (lancamento.retornarNome == lista[i].retornarNome()
+				&& lancamento.valor == lista[i].valor) {
 			return true;
 		}
 	}
@@ -179,25 +188,25 @@ bool ListaContabil::contem(int dado) {
 
 }
 
-int ListaContabil::adicionarEmOrdem(int dado) {
+int ListaContabil::adicionarEmOrdem(Lancamento lancamento) {
 	int pos;
 
 	if (listaCheia())
 		return '\0';
 
 	pos = 0;
-	while (pos <= ultimo && maior(dado, lista[pos].valor)) {
+	while (pos <= ultimo && maior(lancamento.valor, lista[pos].valor)) {
 		pos++;
 	}
 
-	return adicionaNaPosicao(dado, pos);
+	return adicionaNaPosicao(lancamento, pos);
 }
 
-int ListaContabil::posicao(int dado) {
+int ListaContabil::posicao(Lancamento lancamento) {
 
 	int pos = 0;
 
-	while (pos <= ultimo && !(igual(dado, lista[pos].valor))) {
+	while (pos <= ultimo && !(igual(lancamento, lista[pos]))) {
 		pos++;
 	}
 	if (pos > ultimo)
@@ -207,16 +216,23 @@ int ListaContabil::posicao(int dado) {
 
 }
 
-int ListaContabil::retirarEspecifico(int dado) {
+int ListaContabil::retirarEspecifico(Lancamento lancamento) {
 
 	int pos;
 	if (listaVazia())
 		return '\0';
 
-	pos = posicao(dado);
+	pos = posicao(lancamento);
 	if (pos < 0)
 		return '\0';
 
 	return retirarDaPosicao(pos);
 
+}
+
+int ListaContabil::retornarUltimo() {
+	return ultimo;
+}
+Lancamento ListaContabil::retornarLancamento(int pos) {
+	return lista[pos];
 }

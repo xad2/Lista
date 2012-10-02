@@ -18,3 +18,17 @@ Lancamento :: ~Lancamento(){
 void Lancamento::mudarValor(int nvalor){
 	valor = nvalor;
 }
+
+void Lancamento::mudarNome(char *_nome){
+
+	nome = _nome;
+}
+
+char Lancamento::retornarNome(){
+
+	return *nome;
+}
+
+int Lancamento:: retornarValor(){
+	return valor;
+}

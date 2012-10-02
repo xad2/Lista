@@ -17,6 +17,9 @@ private:
 public:
 
 	void mudarValor(int valor);
+	int retornarValor();
+	char retornarNome();
+	void mudarNome(char *nome);
 };
 
 #endif /* LANCAMENTO_H_ */
